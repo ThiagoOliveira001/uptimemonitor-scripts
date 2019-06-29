@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.0" last-position="0,360" last-zoom="1"
+	 default-schema="public" default-owner="postgres">
+<database name="new_database">
+</database>
+
+<schema name="public" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<schema name="seguranca" rect-visible="true" fill-color="#ff0000">
+	<role name="postgres"/>
+</schema>
+
+<table name="usuario">
+	<schema name="seguranca"/>
+	<role name="postgres"/>
+	<comment><![CDATA[usuarios do sistema]]></comment>
+	<position x="120" y="83"/>
+	<column name="id" not-null="true">
+		<type name="smallserial" length="0"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="login" not-null="true">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="senha" not-null="true">
+		<type name="character varying" length="250"/>
+	</column>
+	<column name="idusuariocadastro" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="datacadastro" not-null="true">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="idusuarioalteracao">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="dataalteracao">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="pk_usuario" type="pk-constr" table="seguranca.usuario">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="uq_usuario_login" type="uq-constr" table="seguranca.usuario">
+		<columns names="login" ref-type="src-columns"/>
+		<comment><![CDATA[Login deve ser unico]]></comment>
+	</constraint>
+</table>
+
+<table name="email">
+	<schema name="seguranca"/>
+	<role name="postgres"/>
+	<comment><![CDATA[Tabela para emails dos usuarios]]></comment>
+	<position x="520" y="320"/>
+	<column name="id" not-null="true">
+		<type name="smallserial" length="0"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="principal" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="idusuariocadastro" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="datacadastro" not-null="true">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="idusuarioalteracao">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="dataalteracao">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="pk_email" type="pk-constr" table="seguranca.email">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="uq_email_email" type="uq-constr" table="seguranca.email">
+		<columns names="email" ref-type="src-columns"/>
+		<comment><![CDATA[Email deve ser unico]]></comment>
+	</constraint>
+</table>
+
+<table name="usuarioemail">
+	<schema name="seguranca"/>
+	<role name="postgres"/>
+	<comment><![CDATA[Relacionamento usuario com email]]></comment>
+	<position x="600" y="120"/>
+	<column name="idusuario" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="idemail" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="pk_usuarioemail" type="pk-constr" table="seguranca.usuarioemail">
+		<columns names="idusuario,idemail" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<schema name="administracao" rect-visible="true" fill-color="#0055ff">
+	<role name="postgres"/>
+</schema>
+
+<table name="sistema">
+	<schema name="administracao"/>
+	<role name="postgres"/>
+	<comment><![CDATA[Tabela de sistemas]]></comment>
+	<position x="960" y="63"/>
+	<column name="id" not-null="true">
+		<type name="smallserial" length="0"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="ativo" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="idusuariocadastro" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="idusuarioalteracao">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="datacadastro" not-null="true">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="dataalteracao">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="pk_sistema" type="pk-constr" table="administracao.sistema">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<schema name="operacional" rect-visible="true" fill-color="#00ff00">
+	<role name="postgres"/>
+</schema>
+
+<table name="monitor">
+	<schema name="operacional"/>
+	<role name="postgres"/>
+	<comment><![CDATA[Monitor para verificar se um endpoint está de pé]]></comment>
+	<position x="980" y="440"/>
+	<column name="id" not-null="true">
+		<type name="smallserial" length="0"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="url" not-null="true">
+		<type name="character varying" length="150"/>
+	</column>
+	<column name="up">
+		<type name="boolean" length="0"/>
+		<comment><![CDATA[Indicador se  o endpoint está de pé]]></comment>
+	</column>
+	<column name="idusuariocadastro" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="datacadastro" not-null="true">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="idusuarioalteracao">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="dataalteracao">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="updataalteracao" not-null="true">
+		<type name="timestamp" length="0"/>
+		<comment><![CDATA[Data da ultima alteração do status up]]></comment>
+	</column>
+	<constraint name="pk_monitor" type="pk-constr" table="operacional.monitor">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="uq_monitor_nome" type="uq-constr" table="operacional.monitor">
+		<columns names="nome" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="uq_monitor_url" type="uq-constr" table="operacional.monitor">
+		<columns names="url" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="monitoremail">
+	<schema name="operacional"/>
+	<role name="postgres"/>
+	<comment><![CDATA[Vinculo do monitor com os emails]]></comment>
+	<position x="1360" y="300"/>
+	<column name="idemail" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="idmonitor" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="pk_monitoremail" type="pk-constr" table="operacional.monitoremail">
+		<columns names="idemail,idmonitor" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="monitorusuario">
+	<schema name="operacional"/>
+	<role name="postgres"/>
+	<comment><![CDATA[Vinculo monitor usuario]]></comment>
+	<position x="1480" y="640"/>
+	<column name="idusuario" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="idmonitor" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="read" not-null="true">
+		<type name="boolean" length="0"/>
+		<comment><![CDATA[Permissão leitura]]></comment>
+	</column>
+	<column name="write" not-null="true">
+		<type name="boolean" length="0"/>
+		<comment><![CDATA[Permissão escrita]]></comment>
+	</column>
+	<column name="owner" not-null="true">
+		<type name="boolean" length="0"/>
+		<comment><![CDATA[Permissão proprietário (apenas um owner pode excluir o monitor)]]></comment>
+	</column>
+	<column name="ativo" not-null="true">
+		<type name="boolean" length="0"/>
+		<comment><![CDATA[Apenas fica ativo o usuário no monitor se ele aceitar]]></comment>
+	</column>
+	<constraint name="pk_monitorusuario" type="pk-constr" table="operacional.monitorusuario">
+		<columns names="idusuario,idmonitor" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="fk_usuario_usuario_cadastro" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="seguranca.usuario" table="seguranca.usuario">
+	<columns names="idusuariocadastro" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_usuario_usuario_alteracao" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="seguranca.usuario" table="seguranca.usuario">
+	<columns names="idusuarioalteracao" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_email_usuario_cadastro" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="seguranca.usuario" table="seguranca.email">
+	<columns names="idusuariocadastro" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_email_usuario_alteracao" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="seguranca.usuario" table="seguranca.email">
+	<columns names="idusuarioalteracao" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_usuarioemail_usuario" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="seguranca.usuario" table="seguranca.usuarioemail">
+	<columns names="idusuario" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_usuarioemail_email" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="seguranca.email" table="seguranca.usuarioemail">
+	<columns names="idemail" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_sistema_usuario_cadastro" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="seguranca.usuario" table="administracao.sistema">
+	<columns names="idusuariocadastro" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_sistema_usuario_alteracao" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="seguranca.usuario" table="administracao.sistema">
+	<columns names="idusuarioalteracao" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_monitor_usuario_cadastro" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="seguranca.usuario" table="operacional.monitor">
+	<columns names="idusuariocadastro" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_monitor_usuario_alteracao" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="seguranca.usuario" table="operacional.monitor">
+	<columns names="idusuarioalteracao" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_monitoremail_email" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="seguranca.email" table="operacional.monitoremail">
+	<columns names="idemail" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_monitoremail_monitor" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="operacional.monitor" table="operacional.monitoremail">
+	<columns names="idmonitor" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_monitorusuario_usuario" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="seguranca.usuario" table="operacional.monitorusuario">
+	<columns names="idusuario" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_monitorusuario_monitor" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="operacional.monitor" table="operacional.monitorusuario">
+	<columns names="idmonitor" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_usuarioemail_usuario" type="relfk"
+	 src-table="seguranca.usuarioemail"
+	 dst-table="seguranca.usuario"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_usuarioemail_email" type="relfk"
+	 src-table="seguranca.usuarioemail"
+	 dst-table="seguranca.email"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_usuario_usuario" type="relfk"
+	 src-table="seguranca.usuario"
+	 dst-table="seguranca.usuario"
+	 src-required="false" dst-required="false">
+	<line>
+		<position x="480.9" y="165.8"/>
+	<position x="480.9" y="72"/>
+	<position x="353.267" y="72"/>
+	</line>
+</relationship>
+
+<relationship name="rel_email_usuario" type="relfk"
+	 src-table="seguranca.email"
+	 dst-table="seguranca.usuario"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_sistema_usuario" type="relfk"
+	 src-table="administracao.sistema"
+	 dst-table="seguranca.usuario"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_monitor_usuario" type="relfk"
+	 src-table="operacional.monitor"
+	 dst-table="seguranca.usuario"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_monitoremail_email" type="relfk"
+	 src-table="operacional.monitoremail"
+	 dst-table="seguranca.email"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_monitoremail_monitor" type="relfk"
+	 src-table="operacional.monitoremail"
+	 dst-table="operacional.monitor"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_monitorusuario_usuario" type="relfk"
+	 src-table="operacional.monitorusuario"
+	 dst-table="seguranca.usuario"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_monitorusuario_monitor" type="relfk"
+	 src-table="operacional.monitorusuario"
+	 dst-table="operacional.monitor"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>
