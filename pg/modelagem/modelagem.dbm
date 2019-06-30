@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.0" last-position="0,360" last-zoom="1"
+<dbmodel pgmodeler-ver="0.9.0" last-position="0,0" last-zoom="1"
 	 default-schema="public" default-owner="postgres">
 <database name="new_database">
 </database>
@@ -19,7 +19,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="seguranca"/>
 	<role name="postgres"/>
 	<comment><![CDATA[usuarios do sistema]]></comment>
-	<position x="120" y="83"/>
+	<position x="120" y="80"/>
 	<column name="id" not-null="true">
 		<type name="smallserial" length="0"/>
 	</column>
@@ -43,6 +43,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<column name="dataalteracao">
 		<type name="timestamp" length="0"/>
+	</column>
+	<column name="admin" not-null="true">
+		<type name="boolean" length="0"/>
+		<comment><![CDATA[Apenas usuários admin, podem cadastrar outros usuários]]></comment>
 	</column>
 	<constraint name="pk_usuario" type="pk-constr" table="seguranca.usuario">
 		<columns names="id" ref-type="src-columns"/>
@@ -112,7 +116,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="administracao"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabela de sistemas]]></comment>
-	<position x="960" y="63"/>
+	<position x="960" y="60"/>
 	<column name="id" not-null="true">
 		<type name="smallserial" length="0"/>
 	</column>
@@ -335,9 +339,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 dst-table="seguranca.usuario"
 	 src-required="false" dst-required="false">
 	<line>
-		<position x="480.9" y="165.8"/>
-	<position x="480.9" y="72"/>
-	<position x="353.267" y="72"/>
+		<position x="480.9" y="168.4"/>
+	<position x="480.9" y="69"/>
+	<position x="353.267" y="69"/>
 	</line>
 </relationship>
 
