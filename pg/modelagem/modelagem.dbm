@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.0" last-position="0,0" last-zoom="1"
+<dbmodel pgmodeler-ver="0.9.0" last-position="69,0" last-zoom="1"
 	 default-schema="public" default-owner="postgres">
 <database name="new_database">
 </database>
@@ -19,7 +19,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="seguranca"/>
 	<role name="postgres"/>
 	<comment><![CDATA[usuarios do sistema]]></comment>
-	<position x="120" y="80"/>
+	<position x="120" y="83"/>
 	<column name="id" not-null="true">
 		<type name="smallserial" length="0"/>
 	</column>
@@ -48,6 +48,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="boolean" length="0"/>
 		<comment><![CDATA[Apenas usuários admin, podem cadastrar outros usuários]]></comment>
 	</column>
+	<column name="ativo" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="senhaexpirada" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
 	<constraint name="pk_usuario" type="pk-constr" table="seguranca.usuario">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
@@ -61,7 +67,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="seguranca"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Tabela para emails dos usuarios]]></comment>
-	<position x="520" y="320"/>
+	<position x="520" y="323"/>
 	<column name="id" not-null="true">
 		<type name="smallserial" length="0"/>
 	</column>
@@ -96,7 +102,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="seguranca"/>
 	<role name="postgres"/>
 	<comment><![CDATA[Relacionamento usuario com email]]></comment>
-	<position x="600" y="120"/>
+	<position x="600" y="123"/>
 	<column name="idusuario" not-null="true">
 		<type name="smallint" length="0"/>
 	</column>
@@ -339,9 +345,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 dst-table="seguranca.usuario"
 	 src-required="false" dst-required="false">
 	<line>
-		<position x="480.9" y="168.4"/>
-	<position x="480.9" y="69"/>
-	<position x="353.267" y="69"/>
+		<position x="480.9" y="182.6"/>
+	<position x="480.9" y="72"/>
+	<position x="353.267" y="72"/>
 	</line>
 </relationship>
 
